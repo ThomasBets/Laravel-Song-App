@@ -16,5 +16,3 @@ Route::inertia('/store','Songs/Create');
 Route::inertia('/songs/{id}','Songs/Show');
 
 Route::inertia('/songs/{id}/edit','Songs/Edit');
-
-
