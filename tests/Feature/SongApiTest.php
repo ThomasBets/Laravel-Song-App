@@ -34,8 +34,6 @@ class SongApiTest extends TestCase
     public function test_can_create_a_song()
     {
         // Create and authenticate a user
-        $user = User::factory()->create();
-        $this->actingAs($user, 'sanctum');
 
         $payload = [
             'title' => 'Viva La Vida',
@@ -60,14 +58,14 @@ class SongApiTest extends TestCase
             ->assertJsonFragment([
                 'title' => 'Viva La Vida',
                 'genre' => 'Rock',
-                'user_id' => $user->id,  // confirm the song belongs to the authenticated user
+                'user_id' => $this->user->id,  // confirm the song belongs to the authenticated user
             ]);
 
         // Assert the DB has the song linked to this user
         $this->assertDatabaseHas('songs', [
             'title' => 'Viva La Vida',
             'genre' => 'Rock',
-            'user_id' => $user->id,
+            'user_id' => $this->user->id,
         ]);
     }
 
